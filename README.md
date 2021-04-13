@@ -12,6 +12,7 @@ Total storage space required ~290 MB
 To run NEURON simulations of single neurons:
 
 1) Start by compiling NEURON mechanisms in (./nrn/mechanisms/) folder, then drag `special`/`nrnmech.dll` file (Unix/Windows) into (./nrn/) folder
+Linux command nrnivmodl
 
 On MacOS/Linux:
 Execute following code to make executable:
