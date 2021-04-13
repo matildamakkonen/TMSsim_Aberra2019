@@ -22,8 +22,8 @@ nrn_model_ver_linax = 'maxHlin';
 interpEfield(layer_set_num,nrn_pops{1},nrn_model_ver_linax,Efield_solution,over_write); 
 reverseEfield(layer_set_num,nrn_pops{1},nrn_model_ver,Efield_solution); 
 %% Efield for cTMS simulations
-Efield_solution='M1_PA_Magstim70mm';
-for i = 1:length(nrn_pops)
-    interpEfield(layer_set_num,nrn_pops{i},nrn_model_ver,Efield_solution,over_write); 
-end
+% Efield_solution='M1_PA_Magstim70mm';
+% for i = 1:length(nrn_pops)
+%     interpEfield(layer_set_num,nrn_pops{i},nrn_model_ver,Efield_solution,over_write); 
+% end
 end
