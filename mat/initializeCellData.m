@@ -4,7 +4,7 @@ function initializeCellData()
 mat_dir = addPaths; 
 
 %% Check that nrnmech.dll file exists, if not display a warning message
-nrnmech_file = fullfile(mat_dir, '../nrn', 'nrnmech.dll');
+nrnmech_file = fullfile(mat_dir, '../nrn', 'special');
 if ~isfile(nrnmech_file)
     msg = 'nrniv.exe does not exist. Compile mechanisms and move nrniv.exe to nrn folder';
     f = warndlg(msg, 'modal');
