@@ -1,7 +1,7 @@
 function p_all = plotDataLayers(layers,data,cell_model_names,cell_ids,varargin)
 % Plots median value of simulation data (thresholds,time constants, etc.)
 % on layer surfaces, shifts each layer by shift_dir   
-in.shift_dir = [0,-35,0]; % default shift
+in.shift_dir = [0,-50,0]; % default shift
 in.plot_vertices = 1; % interpolate data onto vertices (cells at element centers)
 in.norm_mode = 'none'; % no normalization
 in = sl.in.processVarargin(in,varargin);
@@ -61,7 +61,13 @@ for i = 1:num_layers
         fprintf('No cells in layer\n');
     end
 end            
-camlight; lighting gouraud;
+%camlight;
+%lighting gouraud;
+material dull;
+h = light;
+lighting flat;
+lightangle(h,-50,30);
+colorbar;
 axis equal; axis tight; 
 axis off; 
 end
