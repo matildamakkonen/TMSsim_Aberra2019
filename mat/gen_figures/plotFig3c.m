@@ -13,14 +13,17 @@ mode = 1; % monophasic MagProX100 pulse
 layer_set_num = 1;
 Efield_name = 'M1_PA_MCB70'; 
 cell_ids = {1:5;6:10;11:15;16:20;21:25}; 
-nrn_pop = 'nrn_pop1-nrn_pop6_all'; 
+%nrn_pop = 'nrn_pop1-nrn_pop6_all'; 
+nrn_pop = 'nrn_pop1'; 
 model_prefix = sprintf('tms_%s_w%g_ls_%g_E_%s_P_%s',nrn_model_ver,mode,...
                             layer_set_num,Efield_name,nrn_pop); 
 %% Plot settings
 cmap = [flipud(fake_parula(1000));0.8 0.8 0.8]; % add gray for values above cutoff
 clims = [70 230]; % A/us
-z_lims = [22 52.4057]; % or []
-lt_pos = [-411 -807 836]; % [170.3353 52.0246 1.2195e3] 
+%z_lims = [22 52.4057]; % or []
+z_lims = [];
+%lt_pos = [-411 -807 836]; % [170.3353 52.0246 1.2195e3] 
+lt_pos = [-300 1000 1000];
 %% Load data
 layers = loadLayers(layer_set_num); 
 data_fold = fullfile(mat_dir,'nrn_sim_data');
@@ -37,8 +40,8 @@ colormap(cmap); caxis(clims);
 view(ax_view); 
 % change light
 ax = gca;
-ax.Children(1).Position = lt_pos;
-ax.Children(1).Style = 'local';
+%ax.Children(1).Position = lt_pos;
+%ax.Children(1).Style = 'local';
 % cut off sulcus
 if ~isempty(z_lims)
    ax.ZLim = z_lims; 
