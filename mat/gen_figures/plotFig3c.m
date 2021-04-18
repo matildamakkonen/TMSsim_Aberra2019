@@ -11,10 +11,11 @@ mat_dir = addPaths;
 nrn_model_ver = 'maxH';
 mode = 1; % monophasic MagProX100 pulse
 layer_set_num = 1;
-Efield_name = 'M1_PA_MCB70'; 
+Efield_name = 'M1_PA_MCB70';
+%Efield_name = 'M1_PA_MCB70_r'; %for reverse
 cell_ids = {1:5;6:10;11:15;16:20;21:25}; 
-nrn_pop = 'nrn_pop1-nrn_pop6_all'; 
-%nrn_pop = 'nrn_pop1'; 
+nrn_pop = 'nrn_pop1-nrn_pop6_all';
+%nrn_pop = 'nrn_pop1'; % also choose this for reverse
 model_prefix = sprintf('tms_%s_w%g_ls_%g_E_%s_P_%s',nrn_model_ver,mode,...
                             layer_set_num,Efield_name,nrn_pop); 
 %% Plot settings
