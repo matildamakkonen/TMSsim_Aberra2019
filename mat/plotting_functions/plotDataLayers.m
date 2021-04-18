@@ -62,12 +62,16 @@ for i = 1:num_layers
     end
 end            
 %camlight; lighting gouraud;
+% add proper lighting
 material dull;
 h = light;
 lighting flat;
 lightangle(h,-50,30);
+
+% add colorbar and define position
 hcb = colorbar;
 hcb.Position = [0.0994,0.371,0.0128,0.315];
+% add colorbar title
 hcb.Label.String = 'Median threshold (A/\mus)';
 hcb.Label.FontSize = 14;
 
