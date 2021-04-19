@@ -30,7 +30,7 @@ for s=1:size(surface.faces,2)
         segment_start(:,count)=pi(:,1);
         segment_finish(:,count)=pi(:,2);
         count=count+1;
-%         hold on,plot3(pi(1,:),pi(2,:),pi(3,:))
+          %hold on,plot3(pi(1,:),pi(2,:),pi(3,:))
     end
 end
 segment_start(:,all(isnan(segment_start),1))=[]; % remove unused poritons 
@@ -105,5 +105,5 @@ for i = cell_order
     end
 end
 slice_line = slice_line'; % column vectors
-slice_line = unique(slice_line,'rows','stable'); 
+%slice_line = unique(slice_line,'rows','stable'); 
 end
