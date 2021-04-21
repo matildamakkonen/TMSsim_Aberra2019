@@ -150,7 +150,8 @@ for i = 1:num_layers
            'FontSize',text_fontsize,'FontName',font_name,'FontWeight','Bold','Interpreter','latex','Color','k');   
    axi3.YColor = 'k'; axi3.XColor = 'k';
    xlabel(axi3,'$$\vec{E} \cdot \hat{n}$$ (norm.)','Interpreter','latex');
-   xlim(axi3,[0 1]);      
+   xlim(axi3,[0 1]);
+   sgtitle('1/Threshold E (norm.)')
 end
 %%
 if save_fig   
