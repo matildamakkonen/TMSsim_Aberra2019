@@ -30,6 +30,7 @@ slices(numLayers+2).slice_line = []; % lines from intersection of plane with lay
 % Add GM/WM slice lines
 slices(1).slice_line = intersectPlaneMeshSurf(plane,MeshROI.surfaces.GrayMatter,start_dim);
 slices(numLayers+2).slice_line = intersectPlaneMeshSurf(plane,MeshROI.surfaces.WhiteMatter,start_dim);
+
 for i = 2:numLayers+1
    layer_surf = layers(i-1).surface; %1 - numLayers   
    slice_linei = intersectPlaneMeshSurf(plane,layer_surf,start_dim); 

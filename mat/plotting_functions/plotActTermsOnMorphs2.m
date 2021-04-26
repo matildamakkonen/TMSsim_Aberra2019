@@ -7,8 +7,9 @@ in.morph_color = 'k';
 in.term_act_col = 'r';
 in.term_act_col2 = 'b';
 in.term_lw = 1.5; 
+%in.term_lw = 7;
 in.cell_inds_file = 'gen_figures/cellplot_inds_ls_1_nrn_pop1';
-in = sl.in.processVarargin(in,varargin); 
+in = sl.in.processVarargin(in,varargin,'allow_non_matches',true); 
 % Threshold data
 if nargin == 0
     cell_id = 6; 
@@ -48,7 +49,7 @@ color_data = in.morph_color;
 edge_dists = vmag(cell_data.C([1;axon_inds]) - cell_data.C([1;cell_data.parent_inds],:)); % 1 for soma
 gi = graph(cell_data.parent_inds,2:length(cell_data.C),edge_dists(2:end)); 
 ax = gca;
-[ax.Children(1:length(indsi)).EdgeAlpha] = deal(in.morph_alpha);
+%[ax.Children(1:length(indsi)).EdgeAlpha] = deal(in.morph_alpha);
 % Plot paths from soma to activated axon terminal
 for j = 1:length(indsi)
     tj = Calli{j}(shortestpath(gi,1,1+find(axon_inds==init_indsi(j))),:);
@@ -62,6 +63,6 @@ for j = 1:length(indsi)
     plot3(tj2(:,1),tj2(:,2),tj2(:,3),'Color',in.term_act_col2,'LineWidth',in.term_lw);    
     % soma
     plot3(Calli{j}(1,1)-0.05,Calli{j}(1,2)+0.05,Calli{j}(1,3),'k.',...
-       'MarkerFaceColor','k','MarkerSize',24);   
+       'MarkerFaceColor','k','MarkerSize',16);   
 end
 end
