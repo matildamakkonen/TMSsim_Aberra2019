@@ -15,7 +15,7 @@ Efield_name = 'M1_PA_MCB70';
 plot_layers = 1:5;
 % Plot settings
 n_cmap = 1000; % number of colormap levels
-cmap_name = 'jet'; % flipped parula
+cmap_name = 'asd'; % flipped parula
 normE = 1; % normalize E-magnitude to max
 cmap2_name = 'bwr'; 
 %z_lims = [22 52.4057]; % or []

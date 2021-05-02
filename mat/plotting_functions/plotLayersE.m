@@ -10,9 +10,9 @@ function E_plot = plotLayersE(layersE,layer_num,mode,normE,color_map,cam_view,sh
        cam_view = [ -137.5 28]; 
     end
     if nargin < 5 
-       color_map = 'jet'; 
+       color_map = brewermap(100,'*PuRd'); 
     elseif isempty(color_map)
-       color_map = 'jet';          
+       color_map = brewermap(100,'*GnBu');          
     end
     if nargin < 4
        normE = 0; % normalize E to max 
