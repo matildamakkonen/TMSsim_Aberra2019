@@ -65,6 +65,22 @@ function E_plot = plotLayersE(layersE,layer_num,mode,normE,color_map,cam_view,sh
             Evecs = Evecs./vmag(Evecs); 
            quiver3(cell_origins(:,1),cell_origins(:,2),cell_origins(:,3),Evecs(:,1),Evecs(:,2),Evecs(:,3),'k'); 
         end
+        if strcmp(mode,'mag')
+            [max_e, max_index] = max(E_plot{i});
+            if i == 5
+                
+                p2 = plot3(layer_surf.vertices(max_index,1),layer_surf.vertices(max_index,2),...
+                layer_surf.vertices(max_index,3)+3,'ok', 'MarkerSize', 9, 'LineWidth',2);
+            else
+       
+                p2 = plot3(layer_surf.vertices(max_index,1),layer_surf.vertices(max_index,2),...
+                layer_surf.vertices(max_index,3)+1,'ok', 'MarkerSize', 9, 'LineWidth',2);
+            end
+            disp(max_e)
+            lgd=legend(p2,'Maximum E-field Magnitude');
+            lgd.FontSize = 14;
+            
+        end
     end
     title(title_str); 
     axis equal; axis tight;
