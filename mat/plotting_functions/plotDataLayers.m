@@ -1,7 +1,7 @@
 function p_all = plotDataLayers(layers,data,cell_model_names,cell_ids,varargin)
 % Plots median value of simulation data (thresholds,time constants, etc.)
 % on layer surfaces, shifts each layer by shift_dir   
-in.shift_dir = [0,-50,0]; % default shift
+in.shift_dir = [0,-40,0]; % default shift
 in.plot_vertices = 1; % interpolate data onto vertices (cells at element centers)
 in.norm_mode = 'none'; % no normalization
 in = sl.in.processVarargin(in,varargin);
@@ -48,6 +48,8 @@ for i = 1:num_layers
         layer_surf = layers(i).surface;
         layer_surf.vertices = layer_surf.vertices + (i-1)*repmat(in.shift_dir,size(layer_surf.vertices,1),1);
         p = patch(layer_surf);
+        [min_thresh, min_index] = min(data_layer{i});
+        %keyboard;
         p.FaceVertexCData = data_layer{i};
         if in.plot_vertices
             p.FaceColor = 'interp';
@@ -56,18 +58,30 @@ for i = 1:num_layers
         end
         p.CDataMapping = 'scaled';
         p.EdgeColor = 'none';
-        hold on;          
+        hold on;
+        p2 = plot3(layer_surf.vertices(min_index,1),layer_surf.vertices(min_index,2),...
+            layer_surf.vertices(min_index,3)+1,'o','Color',[0.87 1 0], 'MarkerSize', 9, 'LineWidth',2);
+        disp(min_thresh)
+        lgd=legend(p2,'Minimum Threshold');
+        lgd.FontSize = 14;
     else
         fprintf('No cells in layer\n');
     end
 end            
-%camlight;
-%lighting gouraud;
+%camlight; lighting gouraud;
+% add proper lighting
 material dull;
 h = light;
 lighting flat;
 lightangle(h,-50,30);
-colorbar;
+
+% add colorbar and define position
+hcb = colorbar;
+hcb.Position = [0.0994,0.371,0.0128,0.315];
+% add colorbar title
+hcb.Label.String = 'Median threshold (A/\mus)';
+hcb.Label.FontSize = 14;
+
 axis equal; axis tight; 
 axis off; 
 end

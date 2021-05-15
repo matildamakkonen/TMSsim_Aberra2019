@@ -10,9 +10,9 @@ function E_plot = plotLayersE(layersE,layer_num,mode,normE,color_map,cam_view,sh
        cam_view = [ -137.5 28]; 
     end
     if nargin < 5 
-       color_map = 'jet'; 
+       color_map = brewermap(100,'*PuRd'); 
     elseif isempty(color_map)
-       color_map = 'jet';          
+       color_map = brewermap(100,'*GnBu');          
     end
     if nargin < 4
        normE = 0; % normalize E to max 
@@ -28,7 +28,8 @@ function E_plot = plotLayersE(layersE,layer_num,mode,normE,color_map,cam_view,sh
         [EfieldLoc{:}] = layersE.EfieldLoc; % put in format of threshEs
         Emag = cellfun(@(x) x(:,4), EfieldLoc,'UniformOutput',0); % E-field magnitude on layer            
         E_plot = Emag; % E-value to plot
-        title_str = 'E magnitude';         
+        title_str = 'E magnitude';
+        colorbar_str = '$$|\vec{E}|$$ (normalized)';
     elseif strcmp(mode,'norm')
         Efield = cell(num_layers,1); cell_normals = cell(num_layers,1);     
         [Efield{:}] = layersE.Efield; % put in format of threshEs
@@ -36,6 +37,7 @@ function E_plot = plotLayersE(layersE,layer_num,mode,normE,color_map,cam_view,sh
         Enorm = cellfun(@(x,y) dot(x(:,4:6),y,2), Efield,cell_normals,'UniformOutput',0); 
         E_plot = Enorm; 
         title_str = 'E normal'; 
+        colorbar_str = '$$\vec{E} \cdot \hat{n}$$ (normalized)';
     end    
     cell_ids = mat2cell((1:num_layers)',ones(1,num_layers));
     cell_model_names = cellModelNames(1:num_layers); % place-holder cell_model_names 
@@ -46,7 +48,7 @@ function E_plot = plotLayersE(layersE,layer_num,mode,normE,color_map,cam_view,sh
        fprintf('Plotting %s normalized to max\n',title_str);
        title_str = [title_str ' (normalized to max)'];
     else
-        title_str = [title_str ' (V/m)']; 
+        title_str = [title_str ' (V/m)'];        
     end
     num_plot_layers = length(layer_num); 
     for i = 1:num_plot_layers
@@ -63,12 +65,35 @@ function E_plot = plotLayersE(layersE,layer_num,mode,normE,color_map,cam_view,sh
             Evecs = Evecs./vmag(Evecs); 
            quiver3(cell_origins(:,1),cell_origins(:,2),cell_origins(:,3),Evecs(:,1),Evecs(:,2),Evecs(:,3),'k'); 
         end
+        if strcmp(mode,'mag')
+            [max_e, max_index] = max(E_plot{i});
+            if i == 5
+                
+                p2 = plot3(layer_surf.vertices(max_index,1),layer_surf.vertices(max_index,2),...
+                layer_surf.vertices(max_index,3)+3,'ok', 'MarkerSize', 9, 'LineWidth',2);
+            else
+       
+                p2 = plot3(layer_surf.vertices(max_index,1),layer_surf.vertices(max_index,2),...
+                layer_surf.vertices(max_index,3)+1,'ok', 'MarkerSize', 9, 'LineWidth',2);
+            end
+            disp(max_e)
+            lgd=legend(p2,'Maximum E-field Magnitude');
+            lgd.FontSize = 14;
+            
+        end
     end
     title(title_str); 
     axis equal; axis tight;
     view(cam_view); 
     colormap(color_map); 
-%     colorbar;
+    hcb = colorbar;
+    hcb.Position = [0.0994,0.371,0.0128,0.315];
+    % add colorbar title
+    hcb.Label.Interpreter = 'latex';
+    hcb.Label.String = colorbar_str;
+    hcb.Label.FontSize = 14;
+    
     xlabel('x'); ylabel('y'); zlabel('z');
-    camlight; lighting gouraud;
+    camlight; %lighting gouraud;
+    material dull;
 end
